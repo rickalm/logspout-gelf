@@ -83,5 +83,5 @@ type GelfMessage struct {
 	ContainerName  string `json:"container_name,omitempty"`
 }
 
-#{"version":"1.1","host":"devops-us-east-1a-20150923080634614","short_message":"Hello","level":6,"facility":"","@version":"1","@timestamp":"2015-10-08T19:15:43.089Z","source_host":"127.0.0.1","message":"","command":"echo Hello","container_name":"loving_bartik","created":"2015-10-08T19:15:42.885062465Z","image_id":"d7057cb020844f245031d27b76cb18af05db1cc3a96a29fa7777af75f5ac91a3","image_name":"busybox","tag":"develop"}
+//version":"1.1","host":"devops-us-east-1a-20150923080634614","short_message":"Hello","level":6,"facility":"","@version":"1","@timestamp":"2015-10-08T19:15:43.089Z","source_host":"127.0.0.1","message":"","command":"echo Hello","container_name":"loving_bartik","created":"2015-10-08T19:15:42.885062465Z","image_id":"d7057cb020844f245031d27b76cb18af05db1cc3a96a29fa7777af75f5ac91a3","image_name":"busybox","tag":"develop"}
 
