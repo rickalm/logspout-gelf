@@ -48,7 +48,7 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 
 		msg := GelfMessage{
 			Version:        "1.1",
-      Host:           os.hostname(),
+      //Host:           os.hostname(),
 			ShortMessage:   m.Data,
 			Timestamp:      float64(m.Time.UnixNano()) / float64(time.Second),
 			ContainerId:    m.Container.ID,
