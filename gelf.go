@@ -53,8 +53,8 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 			Timestamp:      float64(m.Time.UnixNano()) / float64(time.Second),
 			ContainerId:    m.Container.ID,
 			ContainerName:  m.Container.Name,
-			ImageId:        m.Container.Config.Image,
-			ImageName:      m.Container.Image,
+			ImageId:        m.Container.Image,
+			ImageName:      m.Container.Config.Image,
 		}
 		js, err := json.Marshal(msg)
 		if err != nil {
