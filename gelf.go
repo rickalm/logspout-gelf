@@ -52,8 +52,9 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 			ShortMessage:   m.Data,
 			Timestamp:      float64(m.Time.UnixNano()) / float64(time.Second),
 			ContainerId:    m.Container.ID,
-			ContainerImage: m.Container.Config.Image,
 			ContainerName:  m.Container.Name,
+			ImageId:        m.Container.Config.Image,
+			ImageName:      m.Container.Image,
 		}
 		js, err := json.Marshal(msg)
 		if err != nil {
@@ -72,11 +73,15 @@ type GelfMessage struct {
 	Version      string  `json:"version"`
 	Host         string  `json:"host"`
 	ShortMessage string  `json:"short_message"`
-	FullMessage  string  `json:"full_message,omitempty"`
+	FullMessage  string  `json:"message,omitempty"`
 	Timestamp    float64 `json:"timestamp,omitempty"`
 	Level        int     `json:"level,omitempty"`
 
-	ContainerId    string `json:"_docker.container,omitempty"`
-	ContainerImage string `json:"_docker.image,omitempty"`
-	ContainerName  string `json:"_docker.name,omitempty"`
+	ImageId        string `json:"image_id,omitempty"`
+	ImageName      string `json:"image_name,omitempty"`
+	ContainerId    string `json:"container_id,omitempty"`
+	ContainerName  string `json:"container_name,omitempty"`
 }
+
+#{"version":"1.1","host":"devops-us-east-1a-20150923080634614","short_message":"Hello","level":6,"facility":"","@version":"1","@timestamp":"2015-10-08T19:15:43.089Z","source_host":"127.0.0.1","message":"","command":"echo Hello","container_name":"loving_bartik","created":"2015-10-08T19:15:42.885062465Z","image_id":"d7057cb020844f245031d27b76cb18af05db1cc3a96a29fa7777af75f5ac91a3","image_name":"busybox","tag":"develop"}
+
