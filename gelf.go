@@ -62,6 +62,14 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 			ImageId:        m.Container.Image,
 			ImageName:      m.Container.Config.Image,
 		}
+
+    if m.Source == "stdout" {
+      msg.Level = 3
+    }
+    if m.Source == "stderr" {
+      msg.Level = 6
+    }
+
 		js, err := json.Marshal(msg)
 		if err != nil {
 			log.Println("Graylog:", err)
