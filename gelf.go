@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 	"strings"
+  "fmt"
 
 	"github.com/gliderlabs/logspout/router"
 )
@@ -46,6 +47,8 @@ func NewGelfAdapter(route *router.Route) (router.LogAdapter, error) {
 // Stream implements the router.LogAdapter interface.
 func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 	for m := range logstream {
+
+    fmt.Printf("%+v\n",m)
 
 		msg := GelfMessage{
 			Version:        "1.1",
