@@ -48,14 +48,11 @@ func NewGelfAdapter(route *router.Route) (router.LogAdapter, error) {
 func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 	for m := range logstream {
 
-    fmt.Printf("%+v\n\n%+v\n\n%+v\n\n", m, m.Container.Config, m.Container.HostConfig)
-
 		msg := GelfMessage{
 			Version:        "1.1",
       //Host:           os.hostname(),
 			ShortMessage:   m.Data,
 			Timestamp:      m.Time.Format(time.RFC3339Nano),
-			//Timestamp:      float64(m.Time.UnixNano()) / float64(time.Second),
 			ContainerId:    m.Container.ID,
 			ContainerName:  m.Container.Name,
 			ContainerCmd:   strings.Join(m.Container.Config.Cmd," "),
@@ -64,11 +61,9 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 		}
 
     if m.Source == "stdout" {
-			log.Println("Graylog: stdout")
       msg.Level = 3
     }
     if m.Source == "stderr" {
-			log.Println("Graylog: stderr")
       msg.Level = 6
     }
 
@@ -87,7 +82,7 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 
 type GelfMessage struct {
 	Version      string  `json:"version"`
-	Host         string  `json:"host"`
+	Host         string  `json:"host,omitempty"`
 	ShortMessage string  `json:"short_message"`
 	FullMessage  string  `json:"message,omitempty"`
 	Timestamp    string  `json:"timestamp,omitempty"`
@@ -99,6 +94,4 @@ type GelfMessage struct {
 	ContainerName  string `json:"container_name,omitempty"`
 	ContainerCmd   string `json:"command,omitempty"`
 }
-
-//version":"1.1","host":"devops-us-east-1a-20150923080634614","short_message":"Hello","level":6,"facility":"","@version":"1","@timestamp":"2015-10-08T19:15:43.089Z","source_host":"127.0.0.1","message":"","command":"echo Hello","container_name":"loving_bartik","created":"2015-10-08T19:15:42.885062465Z","image_id":"d7057cb020844f245031d27b76cb18af05db1cc3a96a29fa7777af75f5ac91a3","image_name":"busybox","tag":"develop"}
 
