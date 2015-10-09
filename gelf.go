@@ -8,7 +8,6 @@ import (
 	"os"
 	"time"
 	"strings"
-  "fmt"
 
 	"github.com/gliderlabs/logspout/router"
 )
@@ -50,7 +49,7 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 
 		msg := GelfMessage{
 			Version:        "1.1",
-      //Host:           os.hostname(),
+      //Host:           os.hostname(),                            // Running as a container cannot discover the Docker Hostname
 			ShortMessage:   m.Data,
 			Timestamp:      m.Time.Format(time.RFC3339Nano),
 			ContainerId:    m.Container.ID,
