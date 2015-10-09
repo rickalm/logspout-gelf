@@ -51,7 +51,7 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 			Version:        "1.1",
       //Host:           os.hostname(),
 			ShortMessage:   m.Data,
-			Timestamp:      m.Time.Format(RFC3339Nano),
+			Timestamp:      m.Time.Format(time.RFC3339Nano),
 			//Timestamp:      float64(m.Time.UnixNano()) / float64(time.Second),
 			ContainerId:    m.Container.ID,
 			ContainerName:  m.Container.Name,
