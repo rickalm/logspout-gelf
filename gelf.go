@@ -53,7 +53,7 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 			Timestamp:      float64(m.Time.UnixNano()) / float64(time.Second),
 			ContainerId:    m.Container.ID,
 			ContainerName:  m.Container.Name,
-			ContainerCmd:   m.Container.Cmd,
+			ContainerCmd:   m.Container.Config.Cmd,
 			ImageId:        m.Container.Image,
 			ImageName:      m.Container.Config.Image,
 		}
