@@ -48,7 +48,7 @@ func NewGelfAdapter(route *router.Route) (router.LogAdapter, error) {
 func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 	for m := range logstream {
 
-    fmt.Printf("%+v\n%+v\n", m, m.Container)
+    fmt.Printf("%+v\n\n%+v\n\n%+v\n\n", m, m.Container.Config, m.Container.HostConfig)
 
 		msg := GelfMessage{
 			Version:        "1.1",
