@@ -7,6 +7,7 @@ import (
 	"net"
 	"os"
 	"time"
+	"strings"
 
 	"github.com/gliderlabs/logspout/router"
 )
