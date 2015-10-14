@@ -49,7 +49,7 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 
 		msg := GelfMessage{
 			Version:        "1.1",
-      Host:           os.hostname(),                            // Running as a container cannot discover the Docker Hostname
+      			Host:           os.hostname(), // Running as a container cannot discover the Docker Hostname
 			ShortMessage:   m.Data,
 			Timestamp:      m.Time.Format(time.RFC3339Nano),
 			ContainerId:    m.Container.ID,
@@ -59,12 +59,13 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 			ImageName:      m.Container.Config.Image,
 		}
 
-    if m.Source == "stdout" {
-      msg.Level = 3
-    }
-    if m.Source == "stderr" {
-      msg.Level = 6
-    }
+		if m.Source == "stdout" {
+      			msg.Level = 3
+    		}
+    		
+    		if m.Source == "stderr" {
+    			msg.Level = 6
+		}
 
 		js, err := json.Marshal(msg)
 		if err != nil {
