@@ -15,7 +15,7 @@ import (
 var hostname string
 
 func init() {
-	//hostname, _ = os.Hostname()
+	hostname, _ = os.Hostname()
 	router.AdapterFactories.Register(NewGelfAdapter, "gelf")
 }
 
@@ -49,7 +49,7 @@ func (a *GelfAdapter) Stream(logstream chan *router.Message) {
 
 		msg := GelfMessage{
 			Version:        "1.1",
-      			Host:           os.hostname(), // Running as a container cannot discover the Docker Hostname
+      			Host:           hostname, // Running as a container cannot discover the Docker Hostname
 			ShortMessage:   m.Data,
 			Timestamp:      m.Time.Format(time.RFC3339Nano),
 			ContainerId:    m.Container.ID,
