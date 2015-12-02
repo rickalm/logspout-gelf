@@ -23,7 +23,7 @@ and run `docker build -t $(whoami)/logspout:gelf`
 
 ```
 docker run \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /var/run/docker.sock:/tmp/docker.sock \
     -p 8000:80 \
     $(whoami)/logspout:gelf \
     gelf://<graylog_host>:12201
